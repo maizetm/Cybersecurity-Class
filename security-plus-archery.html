@@ -1,1 +1,988 @@
-404: Not Found
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security+ SY0-701 Archery Practice</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0b1020 0%, #1a2332 100%);
+      color: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    #gameContainer {
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    h1 {
+      color: #ffb800;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+    }
+
+    canvas {
+      background: linear-gradient(to bottom, #1e3a5f 0%, #17402b 70%);
+      border: 3px solid #ffb800;
+      border-radius: 8px;
+      display: block;
+      margin: 20px auto;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      cursor: crosshair;
+    }
+
+    #controls {
+      margin: 20px 0;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 28px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #nextBtn {
+      background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+      color: white;
+      display: none;
+    }
+
+    #resetBtn {
+      background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+      color: white;
+    }
+
+    #questionArea {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: left;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      border: 2px solid #334155;
+      display: none;
+    }
+
+    #questionText {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #f1f5f9;
+      font-weight: 500;
+    }
+
+    .optionBtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin: 10px 0;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 2px solid #374151;
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: #f9fafb;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .optionBtn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+      border-color: #4b5563;
+      transform: translateX(4px);
+    }
+
+    .optionBtn:disabled {
+      cursor: default;
+    }
+
+    .optionBtn.correct {
+      background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+      border-color: #10b981;
+      color: white;
+      animation: correctPulse 0.5s ease;
+    }
+
+    .optionBtn.wrong {
+      background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+      border-color: #f87171;
+      color: white;
+      animation: wrongShake 0.5s ease;
+    }
+
+    @keyframes correctPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes wrongShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    #feedback {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    #feedback.correct {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      border: 2px solid #10b981;
+    }
+
+    #feedback.incorrect {
+      background: rgba(248, 113, 113, 0.2);
+      color: #f87171;
+      border: 2px solid #f87171;
+    }
+
+    #feedback strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    #scoreBoard {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 8px;
+      border: 2px solid #334155;
+    }
+
+    .scoreStat { text-align: center; }
+
+    .scoreStat .label {
+      color: #94a3b8;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scoreStat .value {
+      color: #ffb800;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .targetInfo {
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0;
+      font-size: 0.9em;
+      color: #94a3b8;
+    }
+
+    .targetInfo div {
+      padding: 8px 16px;
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 6px;
+      border: 1px solid #334155;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameContainer">
+    <h1>🏹 Security+ SY0-701 Archery Practice</h1>
+    <p class="subtitle">Click a target to get a question. Answer correctly to earn points!</p>
+
+    <div id="scoreBoard">
+      <div class="scoreStat">
+        <div class="label">Score</div>
+        <div class="value" id="scoreValue">0</div>
+      </div>
+      <div class="scoreStat">
+        <div class="label">Questions</div>
+        <div class="value" id="totalValue">0</div>
+      </div>
+      <div class="scoreStat">
+        <div class="label">Accuracy</div>
+        <div class="value" id="accuracyValue">-</div>
+      </div>
+    </div>
+
+    <div class="targetInfo">
+      <div>🎯 <strong>LEFT:</strong> Domains 1-2 (Security Concepts & Threats)</div>
+      <div>🎯 <strong>CENTER:</strong> Domains 3-4 (Architecture & Operations)</div>
+      <div>🎯 <strong>RIGHT:</strong> Domain 5 (Program Management)</div>
+    </div>
+
+    <canvas id="range" width="800" height="300"></canvas>
+
+    <div id="controls">
+      <button id="nextBtn">➡️ Next Shot</button>
+      <button id="resetBtn">🔄 Reset Game</button>
+    </div>
+
+    <div id="questionArea">
+      <div id="questionText"></div>
+      <div id="options"></div>
+      <div id="feedback"></div>
+    </div>
+  </div>
+
+  <script>
+    const questions = {
+      left: [
+        {
+          text: "What kind of security control is associated with a login banner?",
+          options: ["Preventive", "Deterrent", "Corrective", "Detective", "Compensating", "Directive"],
+          answerIndex: 5,
+          explanation: "A login banner is a directive control that informs users of the security policies and acceptable use of the system. It provides guidance and instructions rather than preventing or detecting attacks."
+        },
+        {
+          text: "Which of the following is a preventive physical security control?",
+          options: ["Video surveillance system", "Bollards", "Alarm system", "Motion sensors"],
+          answerIndex: 1,
+          explanation: "Bollards are physical barriers that prevent unauthorized vehicle access, making them preventive controls. Video surveillance, alarms, and motion sensors are detective controls that identify security incidents after they occur."
+        },
+        {
+          text: "Which of the following security concepts is accomplished with the installation of a RADIUS server?",
+          options: ["CIA", "AAA", "ACL", "PEM"],
+          answerIndex: 1,
+          explanation: "RADIUS (Remote Authentication Dial-In User Service) provides AAA services: Authentication (verifying identity), Authorization (granting access rights), and Accounting (tracking user activity)."
+        },
+        {
+          text: "A company purchased cyber insurance to address items listed on the risk register. Which of the following strategies does this represent?",
+          options: ["Accept", "Transfer", "Mitigate", "Avoid"],
+          answerIndex: 1,
+          explanation: "Purchasing cyber insurance transfers the financial risk to the insurance company. This is a risk transfer strategy where another party assumes responsibility for potential losses."
+        },
+        {
+          text: "A company hires a third party to collect information using only public sources (for example, WHOIS records, public DNS, job postings, and public documentation) and without sending traffic to the company's systems. What is this called?",
+          options: ["Vulnerability scanning", "Passive reconnaissance", "Supply chain analysis", "Regulatory audit"],
+          answerIndex: 1,
+          explanation: "Passive reconnaissance relies on OSINT and other non-interactive sources."
+        },
+        {
+          text: "Which of the following threat vectors is most commonly utilized by insider threat actors attempting data exfiltration?",
+          options: ["Unidentified removable devices", "Default network device credentials", "Spear phishing emails", "Impersonation via typosquatting"],
+          answerIndex: 0,
+          explanation: "Insiders commonly use removable media (USB drives, external hard drives) to exfiltrate data because they have physical access and these devices can transfer large amounts of data quickly while potentially evading network monitoring."
+        },
+        {
+          text: "Which of the following methods would most likely be used to identify legacy systems?",
+          options: ["Bug bounty program", "Vulnerability scan", "Package monitoring", "Dynamic analysis"],
+          answerIndex: 1,
+          explanation: "Vulnerability scans identify systems on the network and their software versions, allowing security teams to detect outdated or legacy systems that may no longer receive security updates."
+        },
+        {
+          text: "Which of the following is most likely to be used to document risks, responsible parties, and thresholds?",
+          options: ["Risk tolerance", "Risk transfer", "Risk register", "Risk analysis"],
+          answerIndex: 2,
+          explanation: "A risk register is a centralized document that records identified risks, their owners, likelihood, impact, mitigation strategies, and threshold values for risk acceptance."
+        },
+        {
+          text: "Which of the following best describes the risk present after controls have been applied?",
+          options: ["Residual", "Avoided", "Inherent", "Operational"],
+          answerIndex: 0,
+          explanation: "Residual risk is the remaining risk after security controls and mitigation measures have been implemented. Inherent risk is the risk before controls, while residual risk is what remains after controls are in place."
+        },
+        {
+          text: "A user wants to install apps that are not allowed by the iOS App Store and bypass Apple restrictions. What is this called?",
+          options: ["SQLi", "Cross-site scripting", "Jailbreaking", "Side loading"],
+          answerIndex: 2,
+          explanation: "Jailbreaking is commonly associated with iOS and removes Apple's software restrictions to permit unauthorized apps and modifications."
+        },
+        {
+          text: "To improve security at a data center, an administrator implements CCTV and posts signs about filming. Which best describe these controls?",
+          options: ["Preventive and Corrective", "Deterrent and Detective", "Compensating and Technical", "Directive and Managerial"],
+          answerIndex: 1,
+          explanation: "CCTV is a detective control that records and identifies security breaches. Signage about filming acts as a deterrent to discourage unauthorized access by making potential intruders aware they're being monitored."
+        },
+        {
+          text: "A user has assigned individual rights and permissions to a file on their network drive and adds three users with read-only access. Which access control model is this?",
+          options: ["Discretionary", "Mandatory", "Attribute-based", "Role-based"],
+          answerIndex: 0,
+          explanation: "Discretionary Access Control (DAC) allows the owner of a resource to decide who can access it and what permissions they have. The user (owner) is making discretionary decisions about file access."
+        },
+        {
+          text: "Which of these threat actors would be MOST likely to attack systems for direct financial gain?",
+          options: ["Organized crime", "Hacktivist", "Nation state", "Shadow IT"],
+          answerIndex: 0,
+          explanation: "Organized crime groups typically target systems for direct financial gain through theft, ransomware, fraud, or extortion. Nation states pursue political goals, while hacktivists promote ideological causes."
+        },
+        {
+          text: "A company requires employees to access a sensitive internal application only while physically on-site. Which is the BEST way to enforce this?",
+          options: [
+            "Use SMS-based MFA for all logins",
+            "Restrict access based on internal IP address ranges only",
+            "Require 802.1X network access control with device certificates on the wired LAN and corporate Wi-Fi, and allow application access only from that authenticated network",
+            "Require a strong password policy and account lockout thresholds"
+          ],
+          answerIndex: 2,
+          explanation: "802.1X NAC with device certificates restricts network connectivity to authorized, managed devices that successfully authenticate on the on-site wired network or corporate Wi-Fi. If the application additionally allows access only from that NAC-controlled network, it provides a much stronger on-premises enforcement than IP range checks alone, and it prevents most remote users from appearing on-prem without first gaining access to the secured on-site network."
+        },
+        {
+          text: "Which of the following is used to describe how cautious an organization might be to taking a specific risk?",
+          options: ["Risk appetite", "Risk register", "Risk transfer", "Risk reporting"],
+          answerIndex: 0,
+          explanation: "Risk appetite describes the organization's willingness to accept risk in pursuit of business objectives. It defines how much risk the organization is comfortable taking on."
+        },
+        {
+          text: "A security administrator has examined a server recently compromised by an attacker and determined the system was exploited due to a known OS vulnerability. Which BEST describes this finding?",
+          options: ["Root cause analysis", "E-discovery", "Risk appetite", "Data subject"],
+          answerIndex: 0,
+          explanation: "Root cause analysis investigates why a security incident occurred by identifying the underlying cause. Determining that an unpatched vulnerability led to compromise identifies the root cause of the breach."
+        },
+        {
+          text: "A systems administrator notices that R&D is not using the company VPN when accessing company services. Which scenario describes this activity?",
+          options: ["Espionage", "Data exfiltration", "Nation-state attack", "Shadow IT"],
+          answerIndex: 3,
+          explanation: "Shadow IT refers to IT systems, devices, software, or services used without explicit organizational approval. The R&D department is using unauthorized methods to access company resources."
+        },
+        {
+          text: "A company's website has been compromised and replaced with a political message. Which threat actor would be the MOST likely culprit?",
+          options: ["Insider", "Organized crime", "Shadow IT", "Hacktivist"],
+          answerIndex: 3,
+          explanation: "Hacktivists deface websites to promote political or social causes. This type of attack is characteristic of hacktivist groups seeking to spread their message or protest against an organization."
+        },
+        {
+          text: "A user has received a text message with a link to login and confirm their upcoming work schedule. Which would BEST describe this attack?",
+          options: ["Brute force", "Watering hole", "Typosquatting", "Smishing"],
+          answerIndex: 3,
+          explanation: "Smishing (SMS phishing) uses text messages to trick users into clicking malicious links or providing sensitive information. It's the SMS version of email phishing attacks."
+        },
+        {
+          text: "Employees received an email with a link offering a cash bonus for completing an internal training course. Which would BEST describe this email?",
+          options: ["Watering hole attack", "Cross-site scripting", "Zero-day", "Phishing campaign"],
+          answerIndex: 3,
+          explanation: "This is a phishing campaign using incentive and urgency to trick employees into clicking malicious links. Phishing uses deceptive emails to steal credentials or install malware."
+        }
+      ],
+      center: [
+        {
+          text: "Which of the following would BEST provide a website login using existing credentials from a third-party site?",
+          options: ["Federation", "802.1X", "EAP", "SSO"],
+          answerIndex: 0,
+          explanation: "Federation allows authentication through a third-party identity provider (like logging in with Google or Facebook credentials). It enables trust relationships between different security domains."
+        },
+        {
+          text: "A manufacturing company would like to use an existing router to separate networks using the same physical switch. Which would be the BEST choice?",
+          options: ["Connect with a VPN", "Build an air gapped network", "Use host-based firewalls", "Create separate VLANs"],
+          answerIndex: 3,
+          explanation: "VLANs (Virtual Local Area Networks) provide logical segmentation on the same physical switch without requiring additional hardware. They separate network traffic at Layer 2 for security and performance."
+        },
+        {
+          text: "Which cryptographic method is used to add trust to a digital certificate?",
+          options: ["Steganography", "Hash", "Symmetric encryption", "Digital signature"],
+          answerIndex: 3,
+          explanation: "Digital signatures use asymmetric cryptography to verify authenticity and integrity. A Certificate Authority signs certificates with its private key, allowing others to verify trust using the public key."
+        },
+        {
+          text: "A security administrator is working to find a cost-effective solution to implement certificates for multiple subdomains. Which certificate type should be used?",
+          options: ["Wildcard", "Client certificate", "Self-signed", "Code signing"],
+          answerIndex: 0,
+          explanation: "Wildcard certificates cover a domain and all its subdomains using a single certificate (for example, *.example.com covers mail.example.com, www.example.com, etc.), making them cost-effective for multiple subdomains."
+        },
+        {
+          text: "Logs show failed SSH logins against many different usernames, with only one or two passwords attempted per account from the same IP. Which attack does this describe?",
+          options: ["Spraying", "Downgrade", "Brute force", "DDoS"],
+          answerIndex: 0,
+          explanation: "Password spraying uses a small set of common passwords across many accounts to avoid lockouts."
+        },
+        {
+          text: "Which of the following is used to conceal credit card information in a database log file?",
+          options: ["Tokenization", "Masking", "Hashing", "Obfuscation"],
+          answerIndex: 1,
+          explanation: "Data masking replaces sensitive data with realistic but fake values (for example, replacing card numbers with X's except the last 4 digits). This protects data while maintaining format and usability."
+        },
+        {
+          text: "Which of the following is best to use when determining the severity of a vulnerability?",
+          options: ["CVE", "OSINT", "SOAR", "CVSS"],
+          answerIndex: 3,
+          explanation: "CVSS (Common Vulnerability Scoring System) provides a standardized method to rate vulnerability severity from 0-10 based on exploitability, impact, and other factors. CVE only identifies vulnerabilities without rating severity."
+        },
+        {
+          text: "A security administrator isolates a suspicious file by executing it only in a sandboxed environment to prevent it from affecting production systems while investigating its behavior. Which incident response phase does this BEST represent?",
+          options: ["Eradication", "Preparation", "Recovery", "Containment"],
+          answerIndex: 3,
+          explanation: "Isolating suspected malware to prevent spread is containment, even though investigation occurs during this step."
+        },
+        {
+          text: "A recent penetration test identified that an attacker could flood the MAC address table of network switches. Which would best mitigate this attack?",
+          options: ["Load balancer", "Port security", "IPS", "NGFW"],
+          answerIndex: 1,
+          explanation: "Port security limits the number of MAC addresses allowed on each switch port and can restrict specific MAC addresses. This prevents MAC flooding attacks that overwhelm the switch's MAC address table."
+        },
+        {
+          text: "Which of the following best describes a use case for a DNS sinkhole?",
+          options: [
+            "Identify company domain structure",
+            "Draw employees to malicious sites",
+            "Capture traffic to known-malicious domains",
+            "Attract attackers away from resources"
+          ],
+          answerIndex: 2,
+          explanation: "A DNS sinkhole redirects requests for known-malicious domains to a controlled server, preventing malware from communicating with command-and-control servers and allowing security teams to monitor attempted connections."
+        },
+        {
+          text: "An organization completed a project to deploy SSO across all business applications. Recently, finance selected new cloud-based accounting software. What should be configured?",
+          options: ["RADIUS", "SAML", "EAP", "OpenID"],
+          answerIndex: 1,
+          explanation: "SAML (Security Assertion Markup Language) is a common protocol for enterprise SSO with cloud applications. It enables secure exchange of authentication and authorization data between identity providers and cloud services."
+        },
+        {
+          text: "A company reduces the attack surface of a SCADA environment by placing it on a segmented network and tightly restricting access paths from the corporate network. What does this BEST describe?",
+          options: ["Load balancing", "Least privilege", "Data retention", "Hardening"],
+          answerIndex: 3,
+          explanation: "Hardening includes measures like segmentation and access restrictions to reduce exposure."
+        },
+        {
+          text: "A company would like to minimize database corruption if power is lost to a server. Which would be the BEST strategy?",
+          options: ["Encryption", "Off-site backups", "Journaling", "Replication"],
+          answerIndex: 2,
+          explanation: "Database journaling logs all transactions before committing them, allowing the database to roll back incomplete transactions after unexpected power loss. This helps preserve data integrity and consistency."
+        },
+        {
+          text: "An administrator needs to perform server hardening before deployment. Which steps should be taken?",
+          options: ["Disable default accounts and remove services", "Add to inventory and document passwords", "Send logs to SIEM and join domain", "Enable all services and create backups"],
+          answerIndex: 0,
+          explanation: "Server hardening reduces attack surface by disabling default accounts and removing unnecessary services. These are fundamental hardening practices."
+        },
+        {
+          text: "A Linux administrator is downloading an updated distribution. The site shows an ISO link and SHA256 hash. What describes the use of this hash value?",
+          options: ["Verifies file was not corrupted during transfer", "Provides key for decrypting the ISO", "Authenticates the site as official", "Confirms file contains no malware"],
+          answerIndex: 0,
+          explanation: "Hash values provide file integrity verification. Computing the SHA256 hash of the downloaded file and comparing it to the published hash helps confirm the file was not corrupted or tampered with during download."
+        },
+        {
+          text: "A security administrator is viewing logs showing multiple failed SSH login attempts from the same IP. Which attack does this describe?",
+          options: ["Spraying", "Downgrade", "Brute force", "DDoS"],
+          answerIndex: 2,
+          explanation: "Brute force attacks repeatedly attempt different passwords against an account until finding the correct one. Multiple failed attempts from the same source is a common indicator."
+        },
+        {
+          text: "A security analyst received a tip that sensitive information was leaked. The analyst reviews PCAP and notices unusual traffic between internal and external hosts. What was likely used?",
+          options: ["Encapsulation", "MAC address spoofing", "Steganography", "Broken encryption"],
+          answerIndex: 0,
+          explanation: "Encapsulation (tunneling) can hide data inside legitimate protocols to exfiltrate information. Attackers may encapsulate data in allowed protocols to bypass security controls."
+        },
+        {
+          text: "After confirming systems are infected, the incident response team removes malware, disables compromised accounts, and patches affected hosts to eliminate the threat. Which phase does this BEST represent?",
+          options: ["Eradication", "Preparation", "Recovery", "Containment"],
+          answerIndex: 0,
+          explanation: "Eradication focuses on removing the cause of the incident, such as deleting malware, closing vulnerabilities, and eliminating persistence."
+        },
+        {
+          text: "A data breach has occurred. An administrator is building new servers to get financial systems back online. Which part of incident response is this?",
+          options: ["Lessons learned", "Containment", "Recovery", "Analysis"],
+          answerIndex: 2,
+          explanation: "Recovery involves restoring normal operations after an incident. Building clean servers and bringing systems back online is part of the recovery phase."
+        },
+        {
+          text: "While performing digital forensics, which is most volatile and should have contents collected first?",
+          options: ["Hard drive", "RAM", "SSD", "Temporary files"],
+          answerIndex: 1,
+          explanation: "RAM is the most volatile because it is lost when power is removed. The order of volatility prioritizes RAM before persistent storage."
+        }
+      ],
+      right: [
+        {
+          text: "Which of the following agreement types defines the time frame in which a vendor needs to respond?",
+          options: ["SOW", "SLA", "MOA", "MOU"],
+          answerIndex: 1,
+          explanation: "A Service Level Agreement (SLA) defines measurable service commitments including response times, uptime guarantees, and performance metrics."
+        },
+        {
+          text: "Which of the following addresses individual rights such as the right to be informed and the right to be forgotten?",
+          options: ["GDPR", "PCI DSS", "NIST", "ISO"],
+          answerIndex: 0,
+          explanation: "GDPR grants individuals rights over their personal data, including the right to know how data is used and the right to have data deleted."
+        },
+        {
+          text: "A company is implementing a security model where all application requests must be validated. Which model describes this?",
+          options: ["Public key infrastructure", "Zero trust", "Discretionary access control", "Federation"],
+          answerIndex: 1,
+          explanation: "Zero trust assumes no user or system is trusted by default. Every access request must be verified regardless of location or previous authentication."
+        },
+        {
+          text: "Which of the following data roles is responsible for identifying risks and appropriate access to data?",
+          options: ["Owner", "Custodian", "Steward", "Controller"],
+          answerIndex: 0,
+          explanation: "The data owner is responsible for data classification, determining appropriate access levels, and accepting risks associated with the data."
+        },
+        {
+          text: "Which of the following agreement types is used to limit external discussions?",
+          options: ["BPA", "NDA", "SLA", "MSA"],
+          answerIndex: 1,
+          explanation: "A Non-Disclosure Agreement (NDA) legally binds parties to keep confidential information private."
+        },
+        {
+          text: "Which of the following is the best resource to consult for information on the most common application exploitation methods?",
+          options: ["OWASP", "STIX", "OVAL", "Threat intelligence feed", "CVE"],
+          answerIndex: 0,
+          explanation: "OWASP maintains the OWASP Top 10, which lists common web application security risks and provides guidance on prevention."
+        },
+        {
+          text: "A company needs to keep the fewest records possible while meeting compliance. Which policy describes this requirement?",
+          options: ["Security policy", "Classification policy", "Retention policy", "Access control policy"],
+          answerIndex: 2,
+          explanation: "A data retention policy defines how long data must be kept to meet requirements and when it should be securely destroyed to reduce liability."
+        },
+        {
+          text: "A multinational bank hosts business-critical applications used by customers. Which should the bank use to ensure accessibility during peak times?",
+          options: ["Load balancer", "Cloud backups", "Geographic dispersal", "Disk multipathing"],
+          answerIndex: 0,
+          explanation: "Load balancers distribute traffic across multiple servers to prevent overload and improve availability during peak usage."
+        },
+        {
+          text: "Two companies have been working together for months and would like to qualify their partnership with a broad formal agreement. Which describes this?",
+          options: ["SLA", "SOW", "MOA", "NDA"],
+          answerIndex: 2,
+          explanation: "A Memorandum of Agreement (MOA) or Memorandum of Understanding (MOU) defines a broad partnership between organizations, outlining roles, responsibilities, and commitments without the detail of a contract."
+        },
+        {
+          text: "A Chief Information Security Officer would like to conduct frequent, detailed reviews of systems to track compliance objectives. What is the best method?",
+          options: ["Third-party attestation", "Penetration testing", "Internal auditing", "Vulnerability scans"],
+          answerIndex: 2,
+          explanation: "Internal auditing provides ongoing assessment of controls and compliance with policies and regulations, enabling frequent reviews."
+        },
+        {
+          text: "A city is building an ambulance service network for emergency medical dispatching. Which should have the highest priority?",
+          options: ["Integration costs", "Patch availability", "System availability", "Power usage"],
+          answerIndex: 2,
+          explanation: "For emergency medical services, system availability is critical because operations are time-sensitive and can affect safety."
+        },
+        {
+          text: "A company is creating security standards. Which controls should be selected for: outside building entrance, building lobby, data center door, and server authentication?",
+          options: ["Fencing, Security guard, Access badge, Auth token", "Lighting, Fencing, Biometrics, Access vestibule", "Bollards, CCTV, Smart card, Firewall", "Sensors, Locks, Cameras, Encryption"],
+          answerIndex: 0,
+          explanation: "This aligns with layered physical security and stronger controls as you move inward, then strong authentication for system access."
+        },
+        {
+          text: "A company has decided to perform a disaster recovery exercise during an annual meeting. A simulated disaster will be presented for discussion. What describes this?",
+          options: ["Capacity planning", "Business impact analysis", "Continuity of operations", "Tabletop exercise"],
+          answerIndex: 3,
+          explanation: "A tabletop exercise is discussion-based. Participants walk through scenarios and responses without running a full operational drill."
+        },
+        {
+          text: "An organization maintains a large database of customer information. Which person would be responsible for managing the access rights to this data?",
+          options: ["Data processor", "Data owner", "Data subject", "Data custodian"],
+          answerIndex: 1,
+          explanation: "The data owner is responsible for determining access requirements and managing who should have access, based on business needs and risk."
+        },
+        {
+          text: "An organization wants to formally document how it will continue critical business functions during a disruptive event. Which plan is MOST appropriate?",
+          options: ["BCP", "DRP", "IRP", "AUP"],
+          answerIndex: 0,
+          explanation: "A Business Continuity Plan (BCP) focuses on maintaining essential business functions. A DRP focuses on restoring IT systems, an IRP focuses on incident handling, and an AUP defines acceptable use rules."
+        },
+        {
+          text: "A network engineer deployed redundant switch stacks to increase availability. However, budget only covers one ISP connection. Which best describes the potential risk?",
+          options: ["Equipment MTBF is unknown", "ISP has no SLA", "RPO not determined", "Single point of failure"],
+          answerIndex: 3,
+          explanation: "Despite redundant internal switches, one ISP connection is a single point of failure for external connectivity."
+        },
+        {
+          text: "A security officer is implementing a security awareness program with posters and online training. What will the officer most likely implement next?",
+          options: ["Password policy", "Access badges", "Phishing campaign", "Risk assessment"],
+          answerIndex: 2,
+          explanation: "Simulated phishing campaigns are often used after training to measure effectiveness and identify areas needing reinforcement."
+        },
+        {
+          text: "A newly implemented wireless network allows visitors to connect. Legal is concerned about illicit activities. What should the security team implement?",
+          options: ["Configure RADIUS for device authentication", "Use 802.1X on all devices", "Add guest captive portal with terms and conditions", "Allow WPS for new devices"],
+          answerIndex: 2,
+          explanation: "A captive portal with terms and conditions provides an acceptable use acknowledgement and supports legal positioning for guest access."
+        }
+      ]
+    };
+
+    let score = 0;
+    let totalQuestions = 0;
+    let canAnswer = false;
+    let targetClickEnabled = true;
+
+    const canvas = document.getElementById("range");
+    const ctx = canvas.getContext("2d");
+
+    const groundY = 240;
+    const archerX = 60;
+    const archerY = groundY - 20;
+
+    const targets = [
+      { name: "left",   x: 220, y: 130, radius: 35, color: "#f97316", label: "DOMAINS 1-2" },
+      { name: "center", x: 400, y: 130, radius: 35, color: "#ef4444", label: "DOMAINS 3-4" },
+      { name: "right",  x: 580, y: 130, radius: 35, color: "#3b82f6", label: "DOMAIN 5" }
+    ];
+
+    let arrow = null;
+
+    function drawScene() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#065f46";
+      ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+
+      ctx.strokeStyle = "#047857";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 50; i++) {
+        const x = Math.random() * canvas.width;
+        const y = groundY + Math.random() * 20;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, y + 8);
+        ctx.stroke();
+      }
+
+      drawArcher();
+      targets.forEach(t => drawTarget(t));
+
+      if (arrow) drawArrow();
+
+      if (targetClickEnabled) {
+        ctx.fillStyle = "#ffb800";
+        ctx.font = "bold 18px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Click a target to shoot! 🎯", canvas.width / 2, 30);
+      }
+    }
+
+    function drawArcher() {
+      ctx.save();
+
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.beginPath();
+      ctx.ellipse(archerX, archerY + 45, 15, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "#f9fafb";
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+
+      ctx.beginPath();
+      ctx.arc(archerX, archerY - 20, 12, 0, Math.PI * 2);
+      ctx.fillStyle = "#fbbf24";
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(archerX, archerY - 8);
+      ctx.lineTo(archerX, archerY + 20);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(archerX, archerY + 20);
+      ctx.lineTo(archerX - 12, archerY + 42);
+      ctx.moveTo(archerX, archerY + 20);
+      ctx.lineTo(archerX + 12, archerY + 42);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(archerX, archerY);
+      ctx.lineTo(archerX + 20, archerY + 5);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#f97316";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(archerX + 20, archerY, 18, -Math.PI / 2.5, Math.PI / 2.5);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#e5e7eb";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(archerX + 20, archerY - 14);
+      ctx.lineTo(archerX + 20, archerY + 14);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    let mouseX = 0, mouseY = 0;
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+      drawScene();
+    });
+
+    function isMouseOverTarget(target) {
+      const dx = mouseX - target.x;
+      const dy = mouseY - target.y;
+      return Math.sqrt(dx * dx + dy * dy) <= target.radius + 15;
+    }
+
+    function drawTarget(target) {
+      const isHovered = targetClickEnabled && isMouseOverTarget(target);
+
+      ctx.fillStyle = "#8b4513";
+      ctx.fillRect(target.x - 3, target.y + target.radius + 15, 6, 50);
+
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.beginPath();
+      ctx.arc(target.x + 3, target.y + 3, target.radius + 15, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(target.x, target.y, target.radius + 15, 0, Math.PI * 2);
+      ctx.fillStyle = "#1f2937";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(target.x, target.y, target.radius + 8, 0, Math.PI * 2);
+      ctx.fillStyle = "#fbbf24";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+      ctx.fillStyle = target.color;
+      ctx.fill();
+
+      if (isHovered) {
+        ctx.shadowColor = target.color;
+        ctx.shadowBlur = 20;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      ctx.beginPath();
+      ctx.arc(target.x, target.y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+
+      ctx.fillStyle = "#f9fafb";
+      ctx.font = "bold 12px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(target.label, target.x, target.y + target.radius + 78);
+    }
+
+    function drawArrow() {
+      ctx.save();
+
+      ctx.strokeStyle = "rgba(0,0,0,0.3)";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(arrow.x + 2, arrow.y + 2);
+      ctx.lineTo(arrow.x - 18, arrow.y - 1);
+      ctx.stroke();
+
+      ctx.strokeStyle = "#d4a373";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(arrow.x, arrow.y);
+      ctx.lineTo(arrow.x - 20, arrow.y - 3);
+      ctx.stroke();
+
+      ctx.fillStyle = "#9ca3af";
+      ctx.beginPath();
+      ctx.moveTo(arrow.x, arrow.y);
+      ctx.lineTo(arrow.x - 8, arrow.y - 4);
+      ctx.lineTo(arrow.x - 8, arrow.y + 4);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.moveTo(arrow.x - 20, arrow.y - 3);
+      ctx.lineTo(arrow.x - 25, arrow.y - 8);
+      ctx.lineTo(arrow.x - 25, arrow.y + 2);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    canvas.addEventListener('click', (e) => {
+      if (!targetClickEnabled) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      for (let target of targets) {
+        const dx = clickX - target.x;
+        const dy = clickY - target.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance <= target.radius + 15) {
+          shootArrow(target);
+          break;
+        }
+      }
+    });
+
+    function shootArrow(target) {
+      targetClickEnabled = false;
+
+      const startX = archerX + 25;
+      const startY = archerY + 5;
+      const duration = 35;
+      const vx = (target.x - startX) / duration;
+      const vy = (target.y - startY) / duration;
+
+      arrow = { x: startX, y: startY, vx, vy, targetName: target.name, framesLeft: duration };
+
+      document.getElementById("nextBtn").style.display = "none";
+      animate();
+    }
+
+    function animate() {
+      if (!arrow) return;
+
+      arrow.x += arrow.vx;
+      arrow.y += arrow.vy;
+      arrow.framesLeft--;
+
+      drawScene();
+
+      if (arrow.framesLeft > 0) {
+        requestAnimationFrame(animate);
+      } else {
+        showQuestionForTarget(arrow.targetName);
+      }
+    }
+
+    function showQuestionForTarget(targetName) {
+      const pool = questions[targetName];
+
+      arrow = null;
+
+      if (!pool || pool.length === 0) {
+        alert(`Great job! You've completed all ${targetName} target questions! 🎯\n\nTry another target or reset to play again.`);
+        targetClickEnabled = true;
+        drawScene();
+        return;
+      }
+
+      const qIndex = Math.floor(Math.random() * pool.length);
+      const q = pool.splice(qIndex, 1)[0];
+      renderQuestion(q);
+    }
+
+    function renderQuestion(q) {
+      const questionArea = document.getElementById("questionArea");
+      const questionText = document.getElementById("questionText");
+      const optionsDiv = document.getElementById("options");
+      const feedbackDiv = document.getElementById("feedback");
+
+      questionArea.style.display = "block";
+      questionText.textContent = q.text;
+      optionsDiv.innerHTML = "";
+      feedbackDiv.innerHTML = "";
+      feedbackDiv.className = "";
+      canAnswer = true;
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "optionBtn";
+        btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
+
+        btn.addEventListener("click", () => {
+          if (!canAnswer) return;
+          canAnswer = false;
+          totalQuestions++;
+
+          const optionButtons = document.querySelectorAll(".optionBtn");
+          optionButtons.forEach((b, i) => {
+            b.disabled = true;
+            if (i === q.answerIndex) b.classList.add("correct");
+          });
+
+          if (idx === q.answerIndex) {
+            score++;
+            feedbackDiv.innerHTML = `
+              <strong>✅ Correct!</strong><br><br>
+              <strong>Explanation:</strong> ${q.explanation}
+            `;
+            feedbackDiv.className = "correct";
+          } else {
+            btn.classList.add("wrong");
+            feedbackDiv.innerHTML = `
+              <strong>❌ Incorrect.</strong> The correct answer is: <strong>${String.fromCharCode(65 + q.answerIndex)}. ${q.options[q.answerIndex]}</strong><br><br>
+              <strong>Explanation:</strong> ${q.explanation}
+            `;
+            feedbackDiv.className = "incorrect";
+          }
+
+          updateScoreboard();
+
+          const nextBtn = document.getElementById("nextBtn");
+          nextBtn.style.display = "inline-block";
+          nextBtn.disabled = false;
+        });
+
+        optionsDiv.appendChild(btn);
+      });
+
+      questionArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function updateScoreboard() {
+      document.getElementById("scoreValue").textContent = score;
+      document.getElementById("totalValue").textContent = totalQuestions;
+
+      if (totalQuestions === 0) {
+        document.getElementById("accuracyValue").textContent = "-";
+        return;
+      }
+
+      const accuracy = Math.round((score / totalQuestions) * 100);
+      document.getElementById("accuracyValue").textContent = accuracy + "%";
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      document.getElementById("questionArea").style.display = "none";
+      document.getElementById("nextBtn").style.display = "none";
+      targetClickEnabled = true;
+      arrow = null;
+      drawScene();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (confirm("Reset the game and start over? Your current score will be lost.")) {
+        location.reload();
+      }
+    });
+
+    drawScene();
+    updateScoreboard();
+  </script>
+</body>
+</html>
