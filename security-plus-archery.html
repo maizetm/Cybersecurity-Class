@@ -223,6 +223,151 @@
       border-radius: 6px;
       border: 1px solid #334155;
     }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 850px) {
+      body {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .subtitle {
+        font-size: 1em;
+      }
+
+      #scoreBoard {
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .scoreStat .value {
+        font-size: 1.5em;
+      }
+
+      .scoreStat .label {
+        font-size: 0.8em;
+      }
+
+      .targetInfo {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.85em;
+      }
+
+      .targetInfo div {
+        padding: 6px 12px;
+      }
+
+      canvas {
+        max-width: 100%;
+        height: auto;
+        touch-action: manipulation;
+      }
+
+      #questionArea {
+        padding: 15px;
+      }
+
+      #questionText {
+        font-size: 1.05em;
+      }
+
+      .optionBtn {
+        padding: 12px 14px;
+        font-size: 0.95em;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.4em;
+      }
+
+      .subtitle {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+      }
+
+      #scoreBoard {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 8px 12px;
+      }
+
+      .scoreStat .value {
+        font-size: 1.3em;
+      }
+
+      .targetInfo {
+        font-size: 0.8em;
+      }
+
+      .targetInfo div {
+        padding: 5px 10px;
+      }
+
+      #questionArea {
+        padding: 12px;
+        margin-top: 15px;
+      }
+
+      #questionText {
+        font-size: 1em;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .optionBtn {
+        padding: 10px 12px;
+        font-size: 0.9em;
+        margin: 8px 0;
+      }
+
+      #feedback {
+        padding: 12px;
+        font-size: 0.9em;
+      }
+
+      #controls {
+        margin: 15px 0;
+      }
+
+      button {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .optionBtn:hover:not(:disabled) {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        border-color: #374151;
+        transform: none;
+      }
+
+      .optionBtn:active:not(:disabled) {
+        background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+        border-color: #4b5563;
+        transform: scale(0.98);
+      }
+
+      button:hover:not(:disabled) {
+        transform: none;
+      }
+
+      button:active:not(:disabled) {
+        transform: scale(0.95);
+      }
+    }
   </style>
 </head>
 <body>
@@ -641,6 +786,63 @@
     const canvas = document.getElementById("range");
     const ctx = canvas.getContext("2d");
 
+    // Canvas base dimensions (internal resolution)
+    const BASE_WIDTH = 800;
+    const BASE_HEIGHT = 300;
+    let canvasScale = 1;
+
+    // Responsive canvas scaling
+    function resizeCanvas() {
+      const container = document.getElementById("gameContainer");
+      const maxWidth = container.clientWidth - 6; // Account for border
+
+      if (maxWidth < BASE_WIDTH) {
+        canvasScale = maxWidth / BASE_WIDTH;
+        canvas.style.width = maxWidth + "px";
+        canvas.style.height = (BASE_HEIGHT * canvasScale) + "px";
+      } else {
+        canvasScale = 1;
+        canvas.style.width = BASE_WIDTH + "px";
+        canvas.style.height = BASE_HEIGHT + "px";
+      }
+
+      // Keep internal resolution for crisp rendering
+      canvas.width = BASE_WIDTH;
+      canvas.height = BASE_HEIGHT;
+
+      drawScene();
+    }
+
+    // Get correct coordinates accounting for canvas scaling
+    function getCanvasCoordinates(e) {
+      const rect = canvas.getBoundingClientRect();
+      let clientX, clientY;
+
+      // Handle both mouse and touch events
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else if (e.changedTouches && e.changedTouches.length > 0) {
+        clientX = e.changedTouches[0].clientX;
+        clientY = e.changedTouches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+
+      // Scale coordinates to match internal canvas resolution
+      const x = (clientX - rect.left) / canvasScale;
+      const y = (clientY - rect.top) / canvasScale;
+
+      return { x, y };
+    }
+
+    // Initialize and handle window resize
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("orientationchange", () => {
+      setTimeout(resizeCanvas, 100);
+    });
+
     const groundY = 240;
     const archerX = 60;
     const archerY = groundY - 20;
@@ -737,11 +939,19 @@
     let mouseX = 0, mouseY = 0;
 
     canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
+      const coords = getCanvasCoordinates(e);
+      mouseX = coords.x;
+      mouseY = coords.y;
       drawScene();
     });
+
+    // Touch move for hover effect on touch devices
+    canvas.addEventListener('touchmove', (e) => {
+      const coords = getCanvasCoordinates(e);
+      mouseX = coords.x;
+      mouseY = coords.y;
+      drawScene();
+    }, { passive: true });
 
     function isMouseOverTarget(target) {
       const dx = mouseX - target.x;
@@ -829,12 +1039,12 @@
       ctx.restore();
     }
 
-    canvas.addEventListener('click', (e) => {
+    function handleTargetClick(e) {
       if (!targetClickEnabled) return;
 
-      const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
+      const coords = getCanvasCoordinates(e);
+      const clickX = coords.x;
+      const clickY = coords.y;
 
       for (let target of targets) {
         const dx = clickX - target.x;
@@ -846,7 +1056,15 @@
           break;
         }
       }
-    });
+    }
+
+    canvas.addEventListener('click', handleTargetClick);
+
+    // Touch support for mobile devices
+    canvas.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      handleTargetClick(e);
+    }, { passive: false });
 
     function shootArrow(target) {
       targetClickEnabled = false;
@@ -981,7 +1199,8 @@
       }
     });
 
-    drawScene();
+    // Initialize canvas size and draw
+    resizeCanvas();
     updateScoreboard();
   </script>
 </body>
