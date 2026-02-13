@@ -1,0 +1,1167 @@
+{
+  "packId": "core",
+  "title": "Security+ Core Seed Pack",
+  "version": "1.0.0",
+  "createdAt": "2026-02-12",
+  "questions": [
+    {
+      "id": "core-d1-mcq-0001",
+      "domain": 1,
+      "objectives": ["1.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An attacker defaces a government website to protest a new surveillance law. Which threat-actor motivation best describes this activity?",
+      "choices": [
+        "Hacktivism",
+        "Financial gain",
+        "Espionage",
+        "Service disruption"
+      ],
+      "answerIndex": 0,
+      "explanation": "Hacktivists are motivated by ideological or political beliefs. Defacing a website to protest legislation is a classic example of hacktivism."
+    },
+    {
+      "id": "core-d1-mcq-0002",
+      "domain": 1,
+      "objectives": ["1.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An attacker calls the help desk pretending to be a company executive and requests a password reset. Which social-engineering technique is being used?",
+      "choices": [
+        "Pretexting",
+        "Tailgating",
+        "Shoulder surfing",
+        "Dumpster diving"
+      ],
+      "answerIndex": 0,
+      "explanation": "Pretexting involves creating a fabricated scenario (pretext) to trick someone into providing information or performing an action. Impersonating an executive to request a password reset is a textbook example."
+    },
+    {
+      "id": "core-d1-mcq-0003",
+      "domain": 1,
+      "objectives": ["1.1"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A phishing email is carefully crafted to target the CFO of a Fortune 500 company and references specific merger details. What type of attack is this?",
+      "choices": [
+        "Spear phishing",
+        "Vishing",
+        "Whaling",
+        "Smishing"
+      ],
+      "answerIndex": 2,
+      "explanation": "Whaling is a form of spear phishing that specifically targets high-profile individuals such as executives (the 'big fish'). The use of specific business details to target a CFO makes this a whaling attack."
+    },
+    {
+      "id": "core-d1-mcq-0004",
+      "domain": 1,
+      "objectives": ["1.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Malware encrypts all files on a victim's hard drive and demands payment in cryptocurrency for the decryption key. What type of malware is this?",
+      "choices": [
+        "Spyware",
+        "Ransomware",
+        "Trojan",
+        "Rootkit"
+      ],
+      "answerIndex": 1,
+      "explanation": "Ransomware encrypts the victim's data and demands a ransom payment (often in cryptocurrency) in exchange for the decryption key."
+    },
+    {
+      "id": "core-d1-mcq-0005",
+      "domain": 1,
+      "objectives": ["1.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An attacker sends a small query to thousands of open DNS resolvers with a spoofed source IP set to the victim's address. The resolvers respond with much larger replies, overwhelming the victim. What type of attack is this?",
+      "choices": [
+        "SYN flood",
+        "DNS amplification / reflection DDoS",
+        "ARP poisoning",
+        "On-path (man-in-the-middle)"
+      ],
+      "answerIndex": 1,
+      "explanation": "A DNS amplification/reflection DDoS attack exploits open DNS resolvers by sending spoofed requests so the amplified responses are directed at the victim, overwhelming their bandwidth."
+    },
+    {
+      "id": "core-d1-mcq-0006",
+      "domain": 1,
+      "objectives": ["1.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A web application allows user input to be inserted directly into SQL queries. Which mitigation is MOST effective against SQL injection?",
+      "choices": [
+        "Use parameterized queries (prepared statements)",
+        "Implement client-side input validation",
+        "Hide database error messages from users",
+        "Use POST instead of GET requests"
+      ],
+      "answerIndex": 0,
+      "explanation": "Parameterized queries (prepared statements) separate SQL code from data, preventing injected input from being executed as SQL commands. This is the most effective defense against SQL injection."
+    },
+    {
+      "id": "core-d1-mcq-0007",
+      "domain": 1,
+      "objectives": ["1.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An attacker injects a malicious script into a web forum post. When other users view the post, the script executes in their browsers and steals session cookies. What type of attack is this?",
+      "choices": [
+        "Cross-site scripting (XSS)",
+        "Cross-site request forgery (CSRF)",
+        "SQL injection",
+        "Directory traversal"
+      ],
+      "answerIndex": 0,
+      "explanation": "Cross-site scripting (XSS) occurs when an attacker injects malicious scripts into web content viewed by other users. Stored XSS persists in the application (e.g., a forum post) and executes whenever a user views the content."
+    },
+    {
+      "id": "core-d1-mcq-0008",
+      "domain": 1,
+      "objectives": ["1.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A banking website includes a unique, unpredictable token in every form submission that is validated server-side. Which attack does this primarily mitigate?",
+      "choices": [
+        "Cross-site request forgery (CSRF)",
+        "SQL injection",
+        "Buffer overflow",
+        "Privilege escalation"
+      ],
+      "answerIndex": 0,
+      "explanation": "Anti-CSRF tokens are unique values embedded in forms and validated on the server. They prevent CSRF attacks by ensuring requests originate from the legitimate application rather than a forged cross-site request."
+    },
+    {
+      "id": "core-d1-mcq-0009",
+      "domain": 1,
+      "objectives": ["1.3"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "After running an automated vulnerability scan, the report lists CVE identifiers with severity scores. What is the PRIMARY purpose of reviewing this report?",
+      "choices": [
+        "To identify and prioritize known weaknesses that need remediation",
+        "To confirm the network topology diagram",
+        "To verify backup restoration procedures",
+        "To test employee security awareness"
+      ],
+      "answerIndex": 0,
+      "explanation": "A vulnerability scan report lists known vulnerabilities (CVEs) with severity scores so the security team can identify weaknesses in systems and prioritize remediation efforts based on risk."
+    },
+    {
+      "id": "core-d1-multi-0010",
+      "domain": 1,
+      "objectives": ["1.4"],
+      "difficulty": "medium",
+      "type": "multi",
+      "prompt": "Which of the following are indicators of compromise (IoCs) that suggest a host may have been breached? (Select THREE.)",
+      "choices": [
+        "Unexpected outbound traffic to a known command-and-control IP",
+        "Unusual login times for a service account",
+        "A scheduled OS update completing successfully",
+        "Registry changes to auto-start an unknown executable"
+      ],
+      "answerIndices": [0, 1, 3],
+      "selectCountHint": 3,
+      "explanation": "Unexpected C2 traffic, anomalous login patterns, and suspicious registry modifications are all classic indicators of compromise. A successful scheduled update is normal maintenance activity."
+    },
+    {
+      "id": "core-d1-mcq-0011",
+      "domain": 1,
+      "objectives": ["1.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An attacker obtains a large database of usernames and passwords from a previous breach and tries them against multiple online services. What is this attack called?",
+      "choices": [
+        "Brute force",
+        "Credential stuffing",
+        "Password spraying",
+        "Rainbow table attack"
+      ],
+      "answerIndex": 1,
+      "explanation": "Credential stuffing uses stolen username/password pairs from one breach to attempt logins on other services, exploiting password reuse. Unlike brute force, the attacker already has valid credentials from another source."
+    },
+    {
+      "id": "core-d1-mcq-0012",
+      "domain": 1,
+      "objectives": ["1.4"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "During a penetration test, the tester uses OSINT tools to gather publicly available information about the target organization before any active scanning. Which phase of a penetration test is this?",
+      "choices": [
+        "Reconnaissance",
+        "Exploitation",
+        "Reporting",
+        "Pivoting"
+      ],
+      "answerIndex": 0,
+      "explanation": "Reconnaissance (information gathering) is the first phase of a penetration test where the tester collects publicly available information about the target using OSINT techniques before moving to active scanning."
+    },
+    {
+      "id": "core-d2-mcq-0001",
+      "domain": 2,
+      "objectives": ["2.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Which security principle is best summarized by the phrase 'Never trust, always verify'?",
+      "choices": [
+        "Defense in depth",
+        "Zero Trust",
+        "Least privilege",
+        "Separation of duties"
+      ],
+      "answerIndex": 1,
+      "explanation": "Zero Trust is a security model that assumes no implicit trust for any user, device, or network segment. Every access request must be verified regardless of its origin, hence 'Never trust, always verify.'"
+    },
+    {
+      "id": "core-d2-mcq-0002",
+      "domain": 2,
+      "objectives": ["2.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A network architect divides the corporate network into separate VLANs for HR, Finance, and Engineering. What is the PRIMARY security benefit of this segmentation?",
+      "choices": [
+        "It reduces lateral movement by isolating departments",
+        "It increases internet bandwidth",
+        "It eliminates the need for a firewall",
+        "It encrypts all inter-department traffic"
+      ],
+      "answerIndex": 0,
+      "explanation": "Network segmentation limits lateral movement so that if one segment is compromised, the attacker cannot easily reach other segments. This containment significantly reduces the blast radius of a breach."
+    },
+    {
+      "id": "core-d2-mcq-0003",
+      "domain": 2,
+      "objectives": ["2.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A company provisions virtual machines in a provider's data center and is responsible for patching the OS, middleware, and applications. The provider manages only the physical infrastructure. Which cloud service model is this?",
+      "choices": [
+        "Infrastructure as a Service (IaaS)",
+        "Platform as a Service (PaaS)",
+        "Software as a Service (SaaS)",
+        "Function as a Service (FaaS)"
+      ],
+      "answerIndex": 0,
+      "explanation": "In IaaS the cloud provider supplies compute, storage, and networking infrastructure while the customer is responsible for the operating system, applications, and data. This gives the customer the most control but also the most responsibility."
+    },
+    {
+      "id": "core-d2-mcq-0004",
+      "domain": 2,
+      "objectives": ["2.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A development team packages each microservice into its own isolated environment that shares the host kernel but has its own filesystem and process space. What technology are they using?",
+      "choices": [
+        "Type 1 hypervisor",
+        "Containers (OS-level virtualization)",
+        "Virtual desktop infrastructure (VDI)",
+        "Sandboxing"
+      ],
+      "answerIndex": 1,
+      "explanation": "Containers use OS-level virtualization to isolate applications, sharing the host kernel while providing separate filesystems, process spaces, and network stacks. This makes them lightweight compared to full virtual machines."
+    },
+    {
+      "id": "core-d2-mcq-0005",
+      "domain": 2,
+      "objectives": ["2.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A company wants employees to use one set of credentials to access applications hosted by multiple partner organizations. Which concept enables this cross-organization single sign-on?",
+      "choices": [
+        "Federation",
+        "Kerberos",
+        "RADIUS",
+        "TACACS+"
+      ],
+      "answerIndex": 0,
+      "explanation": "Federation allows identity information to be shared across organizational boundaries so users can authenticate once and access resources in partner organizations without separate credentials."
+    },
+    {
+      "id": "core-d2-mcq-0006",
+      "domain": 2,
+      "objectives": ["2.4"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A user logs in with a password and then must approve a push notification on an authenticator app. The authenticator app represents which authentication factor?",
+      "choices": [
+        "Something you know",
+        "Something you are",
+        "Something you have",
+        "Somewhere you are"
+      ],
+      "answerIndex": 2,
+      "explanation": "An authenticator app on a registered device represents 'something you have.' Combined with a password (something you know), this provides multi-factor authentication."
+    },
+    {
+      "id": "core-d2-mcq-0007",
+      "domain": 2,
+      "objectives": ["2.5"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "In a public key infrastructure (PKI), which entity is responsible for issuing and signing digital certificates?",
+      "choices": [
+        "Registration Authority (RA)",
+        "Certificate Authority (CA)",
+        "Key escrow agent",
+        "Online Certificate Status Protocol responder"
+      ],
+      "answerIndex": 1,
+      "explanation": "The Certificate Authority (CA) is the trusted entity that issues, signs, and manages digital certificates in a PKI hierarchy. The RA validates requests but does not sign certificates."
+    },
+    {
+      "id": "core-d2-mcq-0008",
+      "domain": 2,
+      "objectives": ["2.5"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A web server's private key has been compromised. What should the administrator do FIRST regarding the server's TLS certificate?",
+      "choices": [
+        "Renew the certificate with the same key pair",
+        "Revoke the certificate and generate a new key pair",
+        "Extend the certificate's expiration date",
+        "Disable OCSP stapling"
+      ],
+      "answerIndex": 1,
+      "explanation": "When a private key is compromised, the associated certificate must be revoked immediately to prevent misuse, and a new key pair should be generated before issuing a replacement certificate."
+    },
+    {
+      "id": "core-d2-mcq-0009",
+      "domain": 2,
+      "objectives": ["2.5"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Which protocol provides BOTH confidentiality and integrity for data transmitted between a web browser and a server?",
+      "choices": [
+        "TLS (Transport Layer Security)",
+        "FTP (File Transfer Protocol)",
+        "Telnet",
+        "SNMP v1"
+      ],
+      "answerIndex": 0,
+      "explanation": "TLS provides confidentiality through encryption and integrity through message authentication codes (MACs). It is the standard protocol for securing web traffic (HTTPS) and other communications."
+    },
+    {
+      "id": "core-d2-mcq-0010",
+      "domain": 2,
+      "objectives": ["2.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A remote employee connects to the corporate network over the internet using an encrypted tunnel so all traffic appears as if it originates from inside the network. What technology is being used?",
+      "choices": [
+        "Network Access Control (NAC)",
+        "Remote-access VPN",
+        "Port mirroring",
+        "Load balancer"
+      ],
+      "answerIndex": 1,
+      "explanation": "A remote-access VPN creates an encrypted tunnel over the internet, allowing remote users to securely access the corporate network as if they were physically on-site."
+    },
+    {
+      "id": "core-d2-multi-0011",
+      "domain": 2,
+      "objectives": ["2.1"],
+      "difficulty": "medium",
+      "type": "multi",
+      "prompt": "Which of the following are design considerations that improve system AVAILABILITY? (Select THREE.)",
+      "choices": [
+        "Deploying redundant servers in an active-active cluster",
+        "Using geographic load balancing across multiple data centers",
+        "Encrypting data at rest with AES-256",
+        "Implementing automated failover for critical services"
+      ],
+      "answerIndices": [0, 1, 3],
+      "selectCountHint": 3,
+      "explanation": "Redundant servers, geographic load balancing, and automated failover all directly improve availability by ensuring services remain online during failures. Encryption at rest protects confidentiality, not availability."
+    },
+    {
+      "id": "core-d2-mcq-0012",
+      "domain": 2,
+      "objectives": ["2.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An organization wants the strongest wireless security for its enterprise network and requires mutual authentication with 802.1X and individual session keys. Which standard should they implement?",
+      "choices": [
+        "WEP",
+        "WPA2 Personal",
+        "WPA3 Enterprise",
+        "Open (OWE)"
+      ],
+      "answerIndex": 2,
+      "explanation": "WPA3 Enterprise provides the strongest wireless security with 192-bit encryption, mandatory 802.1X authentication, and individual session keys. It offers mutual authentication and enhanced protections over WPA2."
+    },
+    {
+      "id": "core-d3-mcq-0001",
+      "domain": 3,
+      "objectives": ["3.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "After deploying a new server, an administrator disables all unnecessary services and removes default accounts. What is this practice called?",
+      "choices": [
+        "Hardening",
+        "Sandboxing",
+        "Virtualization",
+        "Load balancing"
+      ],
+      "answerIndex": 0,
+      "explanation": "System hardening involves reducing the attack surface by disabling unnecessary services, removing default accounts, applying least-privilege configurations, and following security benchmarks."
+    },
+    {
+      "id": "core-d3-mcq-0002",
+      "domain": 3,
+      "objectives": ["3.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A critical vulnerability is discovered in a widely used library. The vendor releases an update that fixes the flaw. What is the PRIMARY purpose of applying this update promptly?",
+      "choices": [
+        "To add new features to the application",
+        "To close the known vulnerability before it can be exploited",
+        "To improve the application's user interface",
+        "To reset user passwords"
+      ],
+      "answerIndex": 1,
+      "explanation": "Patching (applying vendor updates) closes known vulnerabilities, reducing the window of opportunity for attackers to exploit them. Prompt patch management is a fundamental security practice."
+    },
+    {
+      "id": "core-d3-mcq-0003",
+      "domain": 3,
+      "objectives": ["3.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which type of firewall tracks the state of active connections and makes filtering decisions based on the context of the traffic flow, not just individual packets?",
+      "choices": [
+        "Packet-filtering firewall",
+        "Stateful inspection firewall",
+        "Web application firewall",
+        "Proxy firewall"
+      ],
+      "answerIndex": 1,
+      "explanation": "A stateful inspection firewall maintains a state table that tracks active connections. It evaluates packets in the context of their connection state, making it more secure than simple packet filtering."
+    },
+    {
+      "id": "core-d3-mcq-0004",
+      "domain": 3,
+      "objectives": ["3.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An organization places a security appliance in front of its web servers that inspects HTTP requests and blocks SQL injection and cross-site scripting attempts. What type of appliance is this?",
+      "choices": [
+        "Web Application Firewall (WAF)",
+        "Network intrusion detection system",
+        "Reverse proxy cache",
+        "Data loss prevention gateway"
+      ],
+      "answerIndex": 0,
+      "explanation": "A Web Application Firewall (WAF) sits in front of web servers and inspects HTTP/HTTPS traffic for application-layer attacks such as SQL injection and XSS, blocking malicious requests before they reach the application."
+    },
+    {
+      "id": "core-d3-mcq-0005",
+      "domain": 3,
+      "objectives": ["3.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "What is the key difference between an Intrusion Detection System (IDS) and an Intrusion Prevention System (IPS)?",
+      "choices": [
+        "An IDS encrypts traffic; an IPS decrypts it",
+        "An IPS can actively block malicious traffic; an IDS only alerts",
+        "An IDS operates at Layer 7; an IPS operates at Layer 2",
+        "An IPS replaces a firewall; an IDS supplements it"
+      ],
+      "answerIndex": 1,
+      "explanation": "An IDS passively monitors traffic and generates alerts when it detects suspicious activity. An IPS is placed inline and can actively block or drop malicious traffic in real time, in addition to alerting."
+    },
+    {
+      "id": "core-d3-mcq-0006",
+      "domain": 3,
+      "objectives": ["3.2"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A security team deploys agents on all workstations that continuously collect telemetry data, detect behavioral anomalies, and enable remote response actions. What solution is this?",
+      "choices": [
+        "Endpoint Detection and Response (EDR)",
+        "Network Access Control (NAC)",
+        "Data Loss Prevention (DLP)",
+        "Security Information and Event Management (SIEM)"
+      ],
+      "answerIndex": 0,
+      "explanation": "EDR solutions deploy agents on endpoints to continuously collect telemetry, detect threats through behavioral analysis, and provide response capabilities such as isolating hosts or killing processes."
+    },
+    {
+      "id": "core-d3-mcq-0007",
+      "domain": 3,
+      "objectives": ["3.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A DevOps team needs to store API keys, database passwords, and TLS certificates securely, with automatic rotation and audit logging. Which solution is MOST appropriate?",
+      "choices": [
+        "A shared spreadsheet with restricted access",
+        "A secrets manager (e.g., HashiCorp Vault)",
+        "Environment variables in plain text config files",
+        "Hard-coded values in source code"
+      ],
+      "answerIndex": 1,
+      "explanation": "A secrets manager provides centralized, encrypted storage for sensitive credentials with features like automatic rotation, access control, and audit logging. Hard-coded secrets or plain text configs are insecure practices."
+    },
+    {
+      "id": "core-d3-mcq-0008",
+      "domain": 3,
+      "objectives": ["3.3"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An organization assigns system permissions based on job functions such as 'Database Administrator' or 'Help Desk Analyst' rather than individual user identities. Which access control model is this?",
+      "choices": [
+        "Role-Based Access Control (RBAC)",
+        "Discretionary Access Control (DAC)",
+        "Mandatory Access Control (MAC)",
+        "Attribute-Based Access Control (ABAC)"
+      ],
+      "answerIndex": 0,
+      "explanation": "RBAC assigns permissions to roles (job functions) rather than individual users. Users are then assigned to roles, simplifying permission management and enforcing the principle of least privilege."
+    },
+    {
+      "id": "core-d3-mcq-0009",
+      "domain": 3,
+      "objectives": ["3.5"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A security analyst computes a SHA-256 hash of a downloaded file and compares it to the hash published on the vendor's website. What security property is the analyst verifying?",
+      "choices": [
+        "Integrity (the file has not been tampered with)",
+        "Confidentiality (the file is encrypted)",
+        "Availability (the file is accessible)",
+        "Non-repudiation (the sender cannot deny sending)"
+      ],
+      "answerIndex": 0,
+      "explanation": "Comparing hash values verifies integrity: if the hashes match, the file has not been altered since the vendor published it. Hashing does not provide confidentiality, availability, or non-repudiation on its own."
+    },
+    {
+      "id": "core-d3-multi-0010",
+      "domain": 3,
+      "objectives": ["3.5"],
+      "difficulty": "medium",
+      "type": "multi",
+      "prompt": "Which of the following properties are provided by a digital signature? (Select THREE.)",
+      "choices": [
+        "Integrity",
+        "Authentication",
+        "Confidentiality",
+        "Non-repudiation"
+      ],
+      "answerIndices": [0, 1, 3],
+      "selectCountHint": 3,
+      "explanation": "A digital signature provides integrity (detects tampering), authentication (verifies the signer's identity), and non-repudiation (the signer cannot deny signing). It does NOT provide confidentiality; encryption is needed for that."
+    },
+    {
+      "id": "core-d3-matching-0011",
+      "domain": 3,
+      "objectives": ["3.1"],
+      "difficulty": "easy",
+      "type": "matching",
+      "prompt": "Match each network protocol or service to its default port number.",
+      "left": ["SSH", "HTTPS", "DNS", "RDP", "SMTPS"],
+      "right": ["22", "443", "53", "3389", "465"],
+      "pairs": [0, 1, 2, 3, 4],
+      "explanation": "SSH uses port 22, HTTPS uses port 443, DNS uses port 53, RDP uses port 3389, and SMTPS (SMTP over TLS) uses port 465. Knowing default ports is essential for firewall configuration and traffic analysis."
+    },
+    {
+      "id": "core-d3-mcq-0012",
+      "domain": 3,
+      "objectives": ["3.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A security team integrates a scanning tool into the CI/CD pipeline that analyzes Infrastructure as Code (IaC) templates before deployment. What is the PRIMARY benefit?",
+      "choices": [
+        "It encrypts the IaC templates at rest",
+        "It identifies security misconfigurations before they reach production",
+        "It automatically patches running virtual machines",
+        "It replaces the need for penetration testing"
+      ],
+      "answerIndex": 1,
+      "explanation": "IaC scanning tools analyze templates (e.g., Terraform, CloudFormation) for security misconfigurations such as overly permissive IAM roles or unencrypted storage, catching issues before deployment to production."
+    },
+    {
+      "id": "core-d4-mcq-0001",
+      "domain": 4,
+      "objectives": ["4.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "During which incident response phase does an organization conduct tabletop exercises and develop runbooks?",
+      "choices": [
+        "Detection and Analysis",
+        "Preparation",
+        "Containment",
+        "Post-Incident Activity"
+      ],
+      "answerIndex": 1,
+      "explanation": "The Preparation phase involves creating incident response plans, conducting tabletop exercises, building runbooks, training staff, and assembling the IR team before incidents occur."
+    },
+    {
+      "id": "core-d4-mcq-0002",
+      "domain": 4,
+      "objectives": ["4.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A SOC analyst receives a SIEM alert about unusual network activity. The analyst investigates the alert to determine whether it represents a real incident. Which IR phase is this?",
+      "choices": [
+        "Preparation",
+        "Detection and Analysis",
+        "Eradication",
+        "Recovery"
+      ],
+      "answerIndex": 1,
+      "explanation": "Detection and Analysis involves identifying potential incidents through alerts, logs, and reports, then validating whether the activity is a true positive that warrants further response."
+    },
+    {
+      "id": "core-d4-mcq-0003",
+      "domain": 4,
+      "objectives": ["4.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "After confirming a workstation is infected with malware, the IR team disconnects it from the network to prevent the malware from spreading. Which IR phase does this action represent?",
+      "choices": [
+        "Containment",
+        "Eradication",
+        "Recovery",
+        "Preparation"
+      ],
+      "answerIndex": 0,
+      "explanation": "Containment involves isolating affected systems to prevent further damage or spread. Disconnecting an infected host from the network is a classic short-term containment action."
+    },
+    {
+      "id": "core-d4-mcq-0004",
+      "domain": 4,
+      "objectives": ["4.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "When performing digital forensics, which type of evidence should be collected FIRST according to the order of volatility?",
+      "choices": [
+        "Hard drive image",
+        "Network logs",
+        "RAM (memory) contents",
+        "Backup tapes"
+      ],
+      "answerIndex": 2,
+      "explanation": "The order of volatility dictates collecting the most volatile evidence first. RAM contents are lost when the system is powered off, making them the highest priority. Hard drives and backups are more persistent."
+    },
+    {
+      "id": "core-d4-mcq-0005",
+      "domain": 4,
+      "objectives": ["4.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A forensic investigator documents every person who handled a piece of evidence, including dates, times, and purposes. What is this documentation called?",
+      "choices": [
+        "Incident timeline",
+        "Chain of custody",
+        "Root cause analysis",
+        "Change management log"
+      ],
+      "answerIndex": 1,
+      "explanation": "Chain of custody documentation tracks who handled evidence, when, and why, ensuring the evidence's integrity and admissibility. Any break in the chain can make evidence inadmissible in court."
+    },
+    {
+      "id": "core-d4-mcq-0006",
+      "domain": 4,
+      "objectives": ["4.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An organization aggregates logs from firewalls, servers, and endpoints into a single platform that correlates events and generates alerts. What type of system is this?",
+      "choices": [
+        "Security Information and Event Management (SIEM)",
+        "Endpoint Detection and Response (EDR)",
+        "Web Application Firewall (WAF)",
+        "Configuration Management Database (CMDB)"
+      ],
+      "answerIndex": 0,
+      "explanation": "A SIEM centralizes log collection, correlates events from multiple sources, and generates alerts for suspicious activity. It provides a unified view of the security posture across the organization."
+    },
+    {
+      "id": "core-d4-mcq-0007",
+      "domain": 4,
+      "objectives": ["4.1"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A security team implements a platform that automatically triages alerts, enriches them with threat intelligence, and executes predefined playbooks to contain threats. What is this technology?",
+      "choices": [
+        "Security Orchestration, Automation, and Response (SOAR)",
+        "Network Access Control (NAC)",
+        "Data Loss Prevention (DLP)",
+        "Identity Provider (IdP)"
+      ],
+      "answerIndex": 0,
+      "explanation": "SOAR platforms automate and orchestrate incident response workflows by integrating with multiple security tools, enriching alerts with context, and executing playbooks to speed up response times."
+    },
+    {
+      "id": "core-d4-mcq-0008",
+      "domain": 4,
+      "objectives": ["4.5"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An organization labels data as Public, Internal, Confidential, or Restricted based on its sensitivity. What is this process called?",
+      "choices": [
+        "Data sanitization",
+        "Data classification",
+        "Data masking",
+        "Data tokenization"
+      ],
+      "answerIndex": 1,
+      "explanation": "Data classification assigns sensitivity labels to data so appropriate security controls can be applied. Common levels include Public, Internal, Confidential, and Restricted (or Top Secret in government contexts)."
+    },
+    {
+      "id": "core-d4-mcq-0009",
+      "domain": 4,
+      "objectives": ["4.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An organization determines it can tolerate losing at most 4 hours of data in the event of a disaster. Which metric defines this tolerance?",
+      "choices": [
+        "Recovery Time Objective (RTO)",
+        "Recovery Point Objective (RPO)",
+        "Mean Time to Repair (MTTR)",
+        "Mean Time Between Failures (MTBF)"
+      ],
+      "answerIndex": 1,
+      "explanation": "RPO defines the maximum acceptable amount of data loss measured in time. If the RPO is 4 hours, backups must be taken at least every 4 hours to meet the recovery objective."
+    },
+    {
+      "id": "core-d4-multi-0010",
+      "domain": 4,
+      "objectives": ["4.1"],
+      "difficulty": "medium",
+      "type": "multi",
+      "prompt": "Which of the following are common log sources that a SOC team would feed into a SIEM? (Select THREE.)",
+      "choices": [
+        "Firewall logs",
+        "Authentication server logs",
+        "DNS query logs",
+        "Office supply inventory reports"
+      ],
+      "answerIndices": [0, 1, 2],
+      "selectCountHint": 3,
+      "explanation": "Firewall logs, authentication logs, and DNS query logs are all critical security data sources that SIEMs ingest for correlation and threat detection. Office supply reports are not security-relevant data."
+    },
+    {
+      "id": "core-d4-ordering-0011",
+      "domain": 4,
+      "objectives": ["4.2"],
+      "difficulty": "hard",
+      "type": "ordering",
+      "prompt": "Place the NIST incident response phases in the correct order from first to last.",
+      "steps": [
+        "Preparation",
+        "Detection and Analysis",
+        "Containment, Eradication, and Recovery",
+        "Post-Incident Activity"
+      ],
+      "correctOrder": [0, 1, 2, 3],
+      "explanation": "The NIST SP 800-61 incident response lifecycle follows four phases: 1) Preparation, 2) Detection and Analysis, 3) Containment, Eradication, and Recovery, and 4) Post-Incident Activity (lessons learned)."
+    },
+    {
+      "id": "core-d4-scenario-0012",
+      "domain": 4,
+      "objectives": ["4.2", "4.3"],
+      "difficulty": "hard",
+      "type": "scenario",
+      "prompt": "You are the on-call incident responder. At 3:00 AM, the SIEM triggers a high-severity alert: multiple file servers are encrypting files rapidly, and a ransom note has appeared. Walk through the response.",
+      "startNodeId": "n0",
+      "nodes": [
+        {
+          "id": "n0",
+          "text": "The SIEM dashboard shows dozens of file-encryption events across three servers. CPU utilization is spiking and users in the Asia-Pacific office are reporting they cannot open shared files. A ransom note demands 5 BTC within 48 hours. What do you do first?",
+          "choices": [
+            {
+              "label": "Immediately isolate the affected servers from the network",
+              "nextId": "n1",
+              "outcome": "continue",
+              "feedback": "Good call. Isolating the servers stops the ransomware from spreading laterally and encrypting additional shares.",
+              "delta": { "xp": 10 }
+            },
+            {
+              "label": "Pay the ransom to restore files quickly",
+              "outcome": "lose",
+              "feedback": "Paying the ransom is not recommended. It funds criminal activity, does not guarantee data recovery, and may violate regulations. Start with containment instead."
+            },
+            {
+              "label": "Shut down the SIEM to stop the alerts",
+              "outcome": "lose",
+              "feedback": "Shutting down the SIEM eliminates your visibility into the attack. You need the SIEM to understand the scope and track attacker activity."
+            }
+          ]
+        },
+        {
+          "id": "n1",
+          "text": "The servers are isolated. The ransomware has encrypted approximately 60% of the shared files. Your manager asks for a status update and next steps. What do you prioritize?",
+          "choices": [
+            {
+              "label": "Capture volatile evidence (RAM dumps, running processes) before powering off systems",
+              "nextId": "n2",
+              "outcome": "continue",
+              "feedback": "Excellent. Capturing volatile evidence preserves forensic data that would be lost on shutdown, following the order of volatility.",
+              "delta": { "xp": 10 }
+            },
+            {
+              "label": "Immediately wipe and reimage all affected servers",
+              "nextId": "n3",
+              "outcome": "continue",
+              "feedback": "Reimaging removes the threat but destroys forensic evidence. You should collect evidence first to understand the attack vector and prevent recurrence.",
+              "delta": { "xp": 0 }
+            }
+          ]
+        },
+        {
+          "id": "n2",
+          "text": "RAM dumps and process listings have been captured. Analysis reveals the ransomware entered via a phishing email with a macro-enabled attachment opened by a user in the APAC office. What is your next step?",
+          "choices": [
+            {
+              "label": "Eradicate the malware, restore from clean backups, and initiate a lessons-learned review",
+              "outcome": "win",
+              "feedback": "Perfect response. You contained the threat, preserved evidence, identified the root cause, and are now eradicating and recovering. The lessons-learned review will improve future defenses.",
+              "delta": { "xp": 15 }
+            },
+            {
+              "label": "Declare the incident resolved and go back to bed",
+              "outcome": "lose",
+              "feedback": "The incident is not resolved. The malware must be eradicated, systems restored from backups, and a thorough review conducted to prevent recurrence."
+            }
+          ]
+        },
+        {
+          "id": "n3",
+          "text": "Servers have been reimaged and restored from yesterday's backup. However, without forensic evidence, you cannot determine how the attacker gained access. Two days later, another ransomware infection occurs via the same vector.",
+          "choices": [
+            {
+              "label": "This time, capture evidence first, identify the root cause, and implement preventive controls",
+              "outcome": "win",
+              "feedback": "Lesson learned the hard way. Skipping evidence collection meant you missed the attack vector. This time you are following proper IR procedures: contain, collect evidence, eradicate, recover, and review.",
+              "delta": { "xp": 5 }
+            },
+            {
+              "label": "Reimage again and hope it does not happen a third time",
+              "outcome": "lose",
+              "feedback": "Without identifying and addressing the root cause, the attacker will continue to exploit the same vulnerability. Evidence collection and root-cause analysis are essential."
+            }
+          ]
+        },
+        {
+          "id": "n4",
+          "text": "The incident has been fully resolved. All systems are restored, the phishing vector has been blocked, and additional email security controls are in place. A lessons-learned meeting is scheduled.",
+          "choices": [
+            {
+              "label": "Document findings, update the IR plan, and conduct staff training on phishing",
+              "outcome": "win",
+              "feedback": "Outstanding. Post-incident activities like documentation, plan updates, and training are critical to improving the organization's security posture.",
+              "delta": { "xp": 10 }
+            }
+          ]
+        }
+      ],
+      "explanation": "This scenario walks through a ransomware incident response following NIST SP 800-61 phases: containment (isolating servers), evidence collection (RAM dumps), eradication and recovery (reimaging and restoring backups), and post-incident activity (lessons learned)."
+    },
+    {
+      "id": "core-d5-mcq-0001",
+      "domain": 5,
+      "objectives": ["5.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "In risk management, how is risk typically calculated?",
+      "choices": [
+        "Threat minus vulnerability",
+        "Likelihood multiplied by impact",
+        "Asset value divided by exposure",
+        "Number of incidents per year"
+      ],
+      "answerIndex": 1,
+      "explanation": "Risk is commonly calculated as Likelihood x Impact. Likelihood represents the probability a threat will exploit a vulnerability, and impact represents the resulting damage or loss."
+    },
+    {
+      "id": "core-d5-mcq-0002",
+      "domain": 5,
+      "objectives": ["5.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An organization purchases a cybersecurity insurance policy to cover financial losses from a data breach. Which risk response strategy does this represent?",
+      "choices": [
+        "Risk avoidance",
+        "Risk transfer",
+        "Risk mitigation",
+        "Risk acceptance"
+      ],
+      "answerIndex": 1,
+      "explanation": "Risk transfer shifts the financial impact of a risk to a third party. Purchasing insurance is the most common example of risk transfer, as the insurer bears the financial burden of covered losses."
+    },
+    {
+      "id": "core-d5-mcq-0003",
+      "domain": 5,
+      "objectives": ["5.2"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A risk assessment team categorizes threats using labels such as 'High,' 'Medium,' and 'Low' rather than assigning dollar values. What type of risk assessment is this?",
+      "choices": [
+        "Quantitative",
+        "Qualitative",
+        "Hybrid",
+        "Actuarial"
+      ],
+      "answerIndex": 1,
+      "explanation": "Qualitative risk assessment uses subjective categories (High/Medium/Low) to evaluate risk, as opposed to quantitative assessment, which assigns specific numerical values such as Annualized Loss Expectancy (ALE)."
+    },
+    {
+      "id": "core-d5-mcq-0004",
+      "domain": 5,
+      "objectives": ["5.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "Which framework provides a set of voluntary cybersecurity standards organized into five core functions: Identify, Protect, Detect, Respond, and Recover?",
+      "choices": [
+        "NIST Cybersecurity Framework (CSF)",
+        "ISO 27001",
+        "COBIT",
+        "ITIL"
+      ],
+      "answerIndex": 0,
+      "explanation": "The NIST Cybersecurity Framework (CSF) organizes cybersecurity activities into five core functions: Identify, Protect, Detect, Respond, and Recover. It is widely adopted as a voluntary framework for managing cybersecurity risk."
+    },
+    {
+      "id": "core-d5-mcq-0005",
+      "domain": 5,
+      "objectives": ["5.3"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A hospital database contains patient diagnoses, treatment records, and prescription history. Under HIPAA, what type of regulated data is this?",
+      "choices": [
+        "Protected Health Information (PHI)",
+        "Personally Identifiable Information (PII)",
+        "Payment Card Industry (PCI) data",
+        "Intellectual property"
+      ],
+      "answerIndex": 0,
+      "explanation": "Patient diagnoses, treatments, and prescriptions are Protected Health Information (PHI) regulated by HIPAA. While PHI may overlap with PII, the specific healthcare context makes PHI the most accurate classification."
+    },
+    {
+      "id": "core-d5-mcq-0006",
+      "domain": 5,
+      "objectives": ["5.1"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "An organization's board of directors approves a document stating that all employees must protect company data and outlines the consequences of non-compliance. What type of governance document is this?",
+      "choices": [
+        "Policy",
+        "Standard",
+        "Procedure",
+        "Guideline"
+      ],
+      "answerIndex": 0,
+      "explanation": "A policy is a high-level document that expresses management's intent and direction for security. It is typically approved by senior leadership and outlines what must be done, but not how to do it."
+    },
+    {
+      "id": "core-d5-mcq-0007",
+      "domain": 5,
+      "objectives": ["5.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Which combination is MOST effective for reducing the success rate of phishing attacks against employees?",
+      "choices": [
+        "Installing a new firewall and updating antivirus signatures",
+        "Conducting regular security awareness training with simulated phishing exercises",
+        "Implementing full-disk encryption on all workstations",
+        "Requiring complex passwords with 90-day rotation"
+      ],
+      "answerIndex": 1,
+      "explanation": "Security awareness training combined with simulated phishing exercises directly addresses the human element of phishing attacks. It teaches employees to recognize and report phishing attempts, reducing click rates over time."
+    },
+    {
+      "id": "core-d5-mcq-0008",
+      "domain": 5,
+      "objectives": ["5.3"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "Before onboarding a cloud service provider, a company reviews the provider's SOC 2 Type II report. What is the PRIMARY purpose of reviewing this report?",
+      "choices": [
+        "To verify the provider's network bandwidth capacity",
+        "To assess the effectiveness of the provider's security controls over a period of time",
+        "To negotiate pricing for the service agreement",
+        "To determine the provider's market share"
+      ],
+      "answerIndex": 1,
+      "explanation": "A SOC 2 Type II report evaluates the design and operating effectiveness of a service organization's controls over a specified period. It provides assurance about security, availability, processing integrity, confidentiality, and privacy."
+    },
+    {
+      "id": "core-d5-mcq-0009",
+      "domain": 5,
+      "objectives": ["5.3"],
+      "difficulty": "easy",
+      "type": "mcq",
+      "prompt": "A secure facility uses a small room with two interlocking doors where only one door can be open at a time to prevent unauthorized individuals from following employees inside. What is this physical control called?",
+      "choices": [
+        "Mantrap (access control vestibule)",
+        "Bollard",
+        "Faraday cage",
+        "Hot aisle"
+      ],
+      "answerIndex": 0,
+      "explanation": "A mantrap (also called an access control vestibule) is a small room with two doors that cannot be open simultaneously. It prevents tailgating by ensuring only authenticated individuals pass through."
+    },
+    {
+      "id": "core-d5-multi-0010",
+      "domain": 5,
+      "objectives": ["5.1"],
+      "difficulty": "medium",
+      "type": "multi",
+      "prompt": "Which of the following are characteristics of a strong security governance program? (Select THREE.)",
+      "choices": [
+        "Clear policies approved by senior leadership",
+        "Defined roles and responsibilities for security functions",
+        "Optional compliance with no enforcement mechanism",
+        "Regular review and update of security documentation"
+      ],
+      "answerIndices": [0, 1, 3],
+      "selectCountHint": 3,
+      "explanation": "Strong governance requires clear policies with executive support, defined roles and responsibilities, and regular reviews. Optional compliance without enforcement undermines the entire governance structure."
+    },
+    {
+      "id": "core-d5-ordering-0011",
+      "domain": 5,
+      "objectives": ["5.2"],
+      "difficulty": "hard",
+      "type": "ordering",
+      "prompt": "Place the following risk management steps in the correct order.",
+      "steps": [
+        "Identify assets and threats",
+        "Assess likelihood and impact",
+        "Select and implement controls",
+        "Monitor and review effectiveness"
+      ],
+      "correctOrder": [0, 1, 2, 3],
+      "explanation": "The risk management workflow begins with identifying assets and threats, then assessing their likelihood and impact, selecting appropriate controls to mitigate the risks, and continuously monitoring the effectiveness of those controls."
+    },
+    {
+      "id": "core-d5-matching-0012",
+      "domain": 5,
+      "objectives": ["5.1"],
+      "difficulty": "medium",
+      "type": "matching",
+      "prompt": "Match each governance document type to its correct description.",
+      "left": ["Policy", "Standard", "Procedure", "Guideline"],
+      "right": [
+        "High-level statement of management intent and direction",
+        "Mandatory, specific technical or operational requirements",
+        "Step-by-step instructions for completing a task",
+        "Recommended best practices that are not mandatory"
+      ],
+      "pairs": [0, 1, 2, 3],
+      "explanation": "Policies set high-level direction, standards define mandatory requirements, procedures provide step-by-step instructions, and guidelines offer non-mandatory recommendations."
+    },
+    {
+      "id": "core-d1-mcq-0013",
+      "domain": 1,
+      "objectives": ["1.2"],
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "An attacker discovers a vulnerability in widely used software that has no vendor patch or public disclosure yet. They exploit it to compromise systems undetected. What type of attack is this?",
+      "choices": [
+        "Zero-day exploit",
+        "Buffer overflow",
+        "Brute-force attack",
+        "Replay attack"
+      ],
+      "answerIndex": 0,
+      "explanation": "A zero-day exploit targets a vulnerability that is unknown to the vendor and for which no patch exists. 'Zero-day' refers to the fact that developers have had zero days to fix the flaw since it was discovered by the attacker."
+    },
+    {
+      "id": "core-d2-mcq-0013",
+      "domain": 2,
+      "objectives": ["2.1"],
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "An architect designs a system where every component can fail independently without bringing down the entire application. Each service validates all inputs regardless of the source, and no component assumes trust from any other. Which TWO security principles are MOST demonstrated?",
+      "choices": [
+        "Defense in depth and Zero Trust",
+        "Least privilege and separation of duties",
+        "Obscurity and implicit deny",
+        "Open design and fail-safe defaults"
+      ],
+      "answerIndex": 0,
+      "explanation": "Defense in depth layers multiple independent security controls so a failure of one does not compromise the system. Zero Trust ensures every component verifies inputs and trusts nothing implicitly. Together they create a resilient architecture."
+    },
+    {
+      "id": "core-d3-mcq-0013",
+      "domain": 3,
+      "objectives": ["3.5"],
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "A company needs to encrypt large volumes of data at rest efficiently. They use a symmetric algorithm to encrypt the data and an asymmetric algorithm to encrypt the symmetric key. What is this approach called?",
+      "choices": [
+        "Hybrid encryption (envelope encryption)",
+        "Homomorphic encryption",
+        "Steganography",
+        "Key stretching"
+      ],
+      "answerIndex": 0,
+      "explanation": "Hybrid (envelope) encryption combines symmetric encryption for data (fast and efficient) with asymmetric encryption for protecting the symmetric key (secure key exchange). This approach is used in TLS, PGP, and cloud KMS systems."
+    },
+    {
+      "id": "core-d4-mcq-0013",
+      "domain": 4,
+      "objectives": ["4.4"],
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "An organization's business continuity plan requires critical services to be restored within 2 hours of a disaster. Which metric defines this maximum acceptable downtime?",
+      "choices": [
+        "Recovery Point Objective (RPO)",
+        "Recovery Time Objective (RTO)",
+        "Mean Time Between Failures (MTBF)",
+        "Service Level Agreement (SLA)"
+      ],
+      "answerIndex": 1,
+      "explanation": "RTO (Recovery Time Objective) defines the maximum acceptable duration of downtime after a disaster. An RTO of 2 hours means critical services must be restored within 2 hours to meet business requirements."
+    },
+    {
+      "id": "core-d5-mcq-0013",
+      "domain": 5,
+      "objectives": ["5.2"],
+      "difficulty": "hard",
+      "type": "mcq",
+      "prompt": "A company determines that the cost of a new security control exceeds the potential loss from the risk it mitigates. Management formally acknowledges the risk and decides not to implement the control. Which risk response strategy is this?",
+      "choices": [
+        "Risk avoidance",
+        "Risk transfer",
+        "Risk mitigation",
+        "Risk acceptance"
+      ],
+      "answerIndex": 3,
+      "explanation": "Risk acceptance occurs when an organization acknowledges a risk and consciously decides not to take action, typically because the cost of mitigation exceeds the potential loss. This decision should be documented and approved by management."
+    },
+    {
+      "id": "core-d1-mcq-0014",
+      "domain": 1,
+      "objectives": ["1.1"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "An attacker sets up a rogue Wi-Fi access point with the same SSID as a coffee shop's legitimate network. Customers unknowingly connect to the attacker's AP, allowing traffic interception. What is this attack called?",
+      "choices": [
+        "Bluesnarfing",
+        "Evil twin",
+        "Deauthentication attack",
+        "War driving"
+      ],
+      "answerIndex": 1,
+      "explanation": "An evil twin attack involves creating a rogue access point that mimics a legitimate wireless network. Victims connect to the attacker's AP, enabling the attacker to intercept, modify, or capture their traffic."
+    },
+    {
+      "id": "core-d3-mcq-0014",
+      "domain": 3,
+      "objectives": ["3.4"],
+      "difficulty": "medium",
+      "type": "mcq",
+      "prompt": "A company implements a system where all outgoing emails are scanned for credit card numbers, Social Security numbers, and other sensitive patterns. Emails containing such data are blocked or quarantined. What technology is this?",
+      "choices": [
+        "Data Loss Prevention (DLP)",
+        "Email gateway antivirus",
+        "Spam filter",
+        "Digital rights management"
+      ],
+      "answerIndex": 0,
+      "explanation": "Data Loss Prevention (DLP) solutions monitor and control data transfers to prevent unauthorized disclosure of sensitive information. They use pattern matching, keyword detection, and classification rules to identify and block data exfiltration."
+    }
+  ]
+}
