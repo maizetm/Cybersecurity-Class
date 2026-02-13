@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-dark: #0a0e1a;
+  --color-cyber-darker: #060810;
+  --color-cyber-blue: #00d4ff;
+  --color-cyber-green: #00ff88;
+  --color-cyber-purple: #a855f7;
+  --color-cyber-red: #ff4444;
+  --color-cyber-orange: #ff8800;
+  --color-cyber-gold: #ffd700;
+  --color-cyber-panel: #111827;
+  --color-cyber-border: #1e293b;
+
+  --color-domain-1: #ef4444;
+  --color-domain-2: #3b82f6;
+  --color-domain-3: #10b981;
+  --color-domain-4: #f59e0b;
+  --color-domain-5: #8b5cf6;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cyber-dark);
+  color: #e2e8f0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-cyber-darker); }
+::-webkit-scrollbar-thumb { background: var(--color-cyber-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor; }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+@keyframes xp-float {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-40px); }
+}
+@keyframes count-up {
+  from { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  to { transform: scale(1); }
+}
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s ease-out; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-xp-float { animation: xp-float 1s ease-out forwards; }
+.animate-count-up { animation: count-up 0.3s ease-out; }
+.animate-pulse-glow { animation: pulse-glow 2s infinite; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
