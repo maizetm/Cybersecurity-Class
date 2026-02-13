@@ -1,5 +1,6 @@
 import { useGame } from '../engine/GameContext';
 import { streakMultiplier } from '../engine/scoring';
+import CharacterAvatar from '../components/CharacterAvatar';
 
 export default function HomePage() {
   const { profile, setPage, startRun, settings, getDueCards, history } = useGame();
@@ -15,11 +16,11 @@ export default function HomePage() {
     <div className="flex flex-col items-center gap-6 p-6 animate-fade-in">
       {/* Avatar area */}
       <div className="relative">
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center text-4xl border-4 border-cyber-blue/30 shadow-lg shadow-cyber-blue/20">
-          {profile.equippedCosmetics.hat === 'hat-crown' ? '👑' :
-           profile.equippedCosmetics.hat === 'hat-shield' ? '🛡️' :
-           profile.equippedCosmetics.hat === 'hat-hacker' ? '🧥' : '🔒'}
-        </div>
+        <CharacterAvatar
+          hat={profile.equippedCosmetics.hat}
+          frame={profile.equippedCosmetics.frame}
+          size={120}
+        />
         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyber-blue text-black text-xs font-bold px-3 py-0.5 rounded-full">
           Lv.{profile.level}
         </div>

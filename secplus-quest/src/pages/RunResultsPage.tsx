@@ -1,4 +1,5 @@
 import { useGame } from '../engine/GameContext';
+import BossAvatar from '../components/BossAvatar';
 
 export default function RunResultsPage() {
   const { history, setPage } = useGame();
@@ -21,7 +22,19 @@ export default function RunResultsPage() {
 
   return (
     <div className="p-6 animate-fade-in max-w-lg mx-auto text-center">
-      <h2 className="text-xl font-bold text-cyber-blue mb-2">Run Complete!</h2>
+      {/* Boss defeated banner */}
+      {lastRun.mode === 'boss' && lastRun.domains[0] && (
+        <div className="mb-4">
+          <BossAvatar domain={lastRun.domains[0]} size={100} defeated={lastRun.correct > lastRun.wrong} />
+          {lastRun.correct > lastRun.wrong && (
+            <p className="text-cyber-green font-bold mt-2 text-sm">Boss Defeated!</p>
+          )}
+        </div>
+      )}
+
+      <h2 className="text-xl font-bold text-cyber-blue mb-2">
+        {lastRun.mode === 'boss' ? 'Battle Complete!' : 'Run Complete!'}
+      </h2>
       <p className="text-sm text-gray-400 mb-6 capitalize">{lastRun.mode} run</p>
 
       {/* Grade */}
