@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGame } from '../engine/GameContext';
 import { DOMAIN_BIOMES } from '../types';
+import BossAvatar from '../components/BossAvatar';
 
 export default function BossSetupPage() {
   const { startRun, setPage, profile } = useGame();
@@ -12,6 +13,11 @@ export default function BossSetupPage() {
 
       <h2 className="text-xl font-bold text-cyber-red mb-2">Boss Battle</h2>
       <p className="text-sm text-gray-400 mb-6">10 domain-focused questions. Fewer lives, bigger rewards.</p>
+
+      {/* Selected boss preview */}
+      <div className="flex justify-center mb-6">
+        <BossAvatar domain={domain} size={140} defeated={profile.bossesDefeated.includes(domain)} />
+      </div>
 
       <div className="flex flex-col gap-2 mb-6">
         {[1, 2, 3, 4, 5].map(d => {

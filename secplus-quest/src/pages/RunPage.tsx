@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useGame } from '../engine/GameContext';
 import QuestionCard from '../components/QuestionCard';
+import BossAvatar from '../components/BossAvatar';
 
 export default function RunPage() {
   const { currentRun, answerQuestion, nextQuestion, endRun, settings } = useGame();
@@ -16,8 +17,10 @@ export default function RunPage() {
 
   if (!currentRun) return null;
 
-  const { questions, currentIndex, correct, wrong, lives, shields, xpEarned, answered, lastAnswerCorrect, finished, mode } = currentRun;
+  const { questions, currentIndex, correct, wrong, lives, shields, xpEarned, answered, lastAnswerCorrect, finished, mode, domains } = currentRun;
   const question = questions[currentIndex];
+  const isBoss = mode === 'boss';
+  const bossDomain = isBoss ? domains[0] : undefined;
 
   if (!question) {
     return (
@@ -53,9 +56,16 @@ export default function RunPage() {
         </div>
       </div>
 
+      {/* Boss avatar during boss battles */}
+      {isBoss && bossDomain && (
+        <div className="flex justify-center mb-3">
+          <BossAvatar domain={bossDomain} size={80} />
+        </div>
+      )}
+
       {/* Progress bar */}
       <div className="w-full max-w-2xl mx-auto h-1.5 bg-cyber-darker rounded-full overflow-hidden mb-6">
-        <div className="h-full bg-cyber-blue rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+        <div className={`h-full rounded-full transition-all duration-300 ${isBoss ? 'bg-cyber-red' : 'bg-cyber-blue'}`} style={{ width: `${progress}%` }} />
       </div>
 
       {/* Question */}
